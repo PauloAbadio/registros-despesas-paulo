@@ -1,0 +1,13 @@
+
+body{ font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:0;}
+.container{ max-width:1000px; margin:20px auto; background:#fff; padding:20px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+header{ text-align:center; margin-bottom:16px;}
+.total{ font-weight:700; margin-top:6px;}
+main{ display:flex; gap:20px; align-items:flex-start;}
+.table{ width:65%;}
+.form{ width:35%;}
+table{ width:100%; border-collapse: collapse;}
+th,td{ border:1px solid #ddd; padding:8px; text-align:left;}
+button{ padding:6px 10px; border: none; background:#d9534f; color:#fff; border-radius:4px; cursor:pointer;}
+button.secondary{ background:#5cb85c;}
+input,select{ width:100%; padding:8px; margin-bottom:8px; box-sizing:border-box;}
