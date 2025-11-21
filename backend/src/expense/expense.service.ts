@@ -18,9 +18,11 @@ export class ExpenseService {
 
   async create(data: CreateExpenseDto): Promise<Expense> {
     const e = this.repo.create({
-      ...data,
+      description: data.description,
+      amount: data.amount,
+      category: data.category,
       date: new Date(data.date)
-    } as any);
+    });
     return this.repo.save(e);
   }
 
