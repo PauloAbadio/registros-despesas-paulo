@@ -1,35 +1,37 @@
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Expense } from './expense.entity';
-import { Repository } from 'typeorm';
-import { CreateExpenseDto } from './dto/create-expense.dto';
+import { Expense } from "./expense.entity";
+import { CreateExpenseDto } from "./dto/create-expense.dto";
 
 @Injectable()
 export class ExpenseService {
   constructor(
     @InjectRepository(Expense)
-    private repo: Repository<Expense>,
+    private repo: Repository<Expense>
   ) {}
 
   async findAll(): Promise<Expense[]> {
-    return this.repo.find({ order: { date: 'DESC' } });
+    return this.repo.find({
+      order: { date: "DESC" },
+    });
   }
 
   async create(data: CreateExpenseDto): Promise<Expense> {
-    const e = this.repo.create({
-      description: data.description,
-      amount: data.amount,
-      category: data.category,
-      date: new Date(data.date)
+    const expense: Expense = this.repo.create({
+      ...data,
+      date: new Date(data.date),
     });
-    return this.repo.save(e);
+
+    return await this.repo.save(expense);
   }
 
   async remove(id: string): Promise<void> {
     const result = await this.repo.delete(id);
+
     if (result.affected === 0) {
-      throw new NotFoundException('Expense not found');
+      throw new NotFoundException("Expense not found");
     }
   }
 }
